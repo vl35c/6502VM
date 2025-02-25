@@ -21,8 +21,8 @@ static __uint8_t getByte(__uint16_t bytes, int offset) {
 }
 
 void displayCPUStatus(p6502 proc) {
-    __uint8_t pcByte1 = getByte(proc.cpu->PC, 0);
-    __uint8_t pcByte2 = getByte(proc.cpu->PC, 1);
+    Byte pcByte1 = getByte(proc.cpu->PC, 0);
+    Byte pcByte2 = getByte(proc.cpu->PC, 1);
     printf("PC | [0x%02x] [0x%02x]\n", pcByte1, pcByte2);
     printf("SP | [0x%02x]\n", proc.cpu->SP);
     printf("AC | [0x%02x]\n", proc.cpu->AC);

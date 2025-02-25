@@ -3,6 +3,10 @@
 
 #include <stdint.h>
 
+#include "common.h"
+
+#define MAX_MEM 1024 * 64
+
 typedef struct {
     __uint8_t CF : 1;   // carry flag
     __uint8_t ZF : 1;   // zero flag
@@ -22,8 +26,13 @@ typedef struct {
 } CPU;
 
 typedef struct {
+    Byte data[MAX_MEM];
+} Memory;
+
+typedef struct {
     Processor* processor;
     CPU* cpu;
+    Memory* memory;
 } p6502;
 
 void init6502(p6502* proc);
