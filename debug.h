@@ -6,5 +6,6 @@
 
 void displayProcessorStatus(p6502 proc);
 void displayCPUStatus(p6502 proc);
+void writeByte(Memory* memory, __uint16_t address, Byte data);
 
 #endif

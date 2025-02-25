@@ -19,10 +19,10 @@ typedef struct {
 
 typedef struct {
     __uint16_t PC;      // program counter
-    __uint8_t  SP;      // stack pointer
-    __uint8_t  AC;      // accumulator
-    __uint8_t  IX;      // index register x
-    __uint8_t  IY;      // index register y
+    Byte SP;            // stack pointer
+    Byte AC;            // accumulator
+    Byte IX;            // index register x
+    Byte IY;            // index register y
 } CPU;
 
 typedef struct {

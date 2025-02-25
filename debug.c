@@ -16,8 +16,8 @@ void displayProcessorStatus(p6502 proc) {
 }
 
 // little endian, so offset of 1 to [0x1234] gives [0x12]
-static __uint8_t getByte(__uint16_t bytes, int offset) {
-    return (__uint8_t)(bytes >> (8 * offset));
+static Byte getByte(__uint16_t bytes, int offset) {
+    return (Byte)(bytes >> (8 * offset));
 }
 
 void displayCPUStatus(p6502 proc) {
@@ -25,7 +25,11 @@ void displayCPUStatus(p6502 proc) {
     Byte pcByte2 = getByte(proc.cpu->PC, 1);
     printf("PC | [0x%02x] [0x%02x]\n", pcByte1, pcByte2);
     printf("SP | [0x%02x]\n", proc.cpu->SP);
-    printf("AC | [0x%02x]\n", proc.cpu->AC);
+    printf("AC | [0x%02x] (%d)\n", proc.cpu->AC, proc.cpu->AC);
     printf("IX | [0x%02x]\n", proc.cpu->IX);
     printf("IY | [0x%02x]\n", proc.cpu->IY);
+}
+
+void writeByte(Memory* memory, __uint16_t address, Byte data) {
+    memory->data[address] = data;
 }

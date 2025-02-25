@@ -6,12 +6,6 @@ static void initCPU(p6502* proc) {
     CPU* cpu = (CPU*)malloc(sizeof(CPU));
     proc->cpu = cpu;
 
-    __uint16_t pcValue = 0x1234;
-    Byte spValue = 0x00;
-    Byte acValue = 0x00;
-    Byte ixValue = 0x00;
-    Byte iyValue = 0x00;
-
     proc->cpu->PC = 0xFFFA;
     proc->cpu->SP = 0x00;
     proc->cpu->AC = 0x00;
@@ -39,9 +33,6 @@ static void initMemory(p6502* proc) {
     for (int i = 0; i < MAX_MEM; i++) {
         memory->data[i] = 0x00;
     }
-
-    memory->data[0xFFFA] = 0xA9;
-    memory->data[0xFFFB] = 0x00;
 }
 
 void init6502(p6502* proc) {
