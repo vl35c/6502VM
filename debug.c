@@ -1,10 +1,11 @@
 #include <memory.h>
+#include <stdarg.h>
 #include <stdio.h>
 
 #include "debug.h"
 
 void displayProcessorStatus(p6502 proc) {
-    printf("________\n");
+    printf("\n________\n");
     printf("|CF | %d|\n", proc.processor->CF);
     printf("|ZF | %d|\n", proc.processor->ZF);
     printf("|ID | %d|\n", proc.processor->ID);
@@ -23,7 +24,7 @@ static Byte getByte(__uint16_t bytes, int offset) {
 void displayCPUStatus(p6502 proc) {
     Byte pcByte1 = getByte(proc.cpu->PC, 0);
     Byte pcByte2 = getByte(proc.cpu->PC, 1);
-    printf("PC | [0x%02x] [0x%02x]\n", pcByte1, pcByte2);
+    printf("\nPC | [0x%02x] [0x%02x]\n", pcByte1, pcByte2);
     printf("SP | [0x%02x]\n", proc.cpu->SP);
     printf("AC | [0x%02x] (%d)\n", proc.cpu->AC, proc.cpu->AC);
     printf("IX | [0x%02x]\n", proc.cpu->IX);
@@ -32,4 +33,60 @@ void displayCPUStatus(p6502 proc) {
 
 void writeByte(Memory* memory, __uint16_t address, Byte data) {
     memory->data[address] = data;
+}
+
+static void fetchMemory(const char* code, Memory* memory, CPU* cpu) {
+    printf("%-8s 0x%04x -> 0x%04x\n  PC -> 0x%04x\n", code, cpu->PC, memory->data[cpu->PC], cpu->PC + 1);
+}
+
+static void readMemory(const char* code, Memory* memory, __uint16_t address) {
+    printf("%-8s 0x%04x -> 0x%04x\n", code, address, memory->data[address]);
+}
+
+static void addByte(const char* code, Byte byte1, Byte byte2) {
+    printf("%-8s 0x%04x +  0x%04x = 0x%04x (ZP)\n", code, byte1, byte2, (Byte)(byte1 + byte2));
+}
+
+static void addAddress(const char* code, __uint16_t address, Byte add) {
+    printf("%-8s 0x%04x +  0x%04x = 0x%04x\n", code, address, add, address + add);
+}
+
+static void combineBytes(const char* code, Byte byte1, Byte byte2) {
+    printf("%-8s 0x%02x, 0x%02x -> 0x%04x\n", code, byte1, byte2, (byte2 << 8) + byte1);
+}
+
+void traceProcessor(TraceCode code, ...) {
+    switch (code) {
+        case TRACE_FETCH: fetchMemory("FETCH", proc.memory, proc.cpu); break;
+        case TRACE_READ: {
+            va_list args;
+            va_start(args, code);
+            readMemory("READ", proc.memory, va_arg(args, int));
+            va_end(args);
+            break;
+        }
+        case TRACE_ADD_BYTE: {
+            va_list args;
+            va_start(args, code);
+            addByte("ADD", va_arg(args, int), va_arg(args, int));
+            va_end(args);
+            break;
+        }
+        case TRACE_ADD_ADDRESS: {
+            va_list args;
+            va_start(args, code);
+            addAddress("ADD", va_arg(args, int), va_arg(args, int));
+            va_end(args);
+            break;
+        }
+        case TRACE_COMBINE: {
+            va_list args;
+            va_start(args, code);
+            combineBytes("COMBINE", va_arg(args, int), va_arg(args, int));
+            va_end(args);
+            break;
+        }
+        default:
+            return;
+    }
 }
