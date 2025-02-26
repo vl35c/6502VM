@@ -3,7 +3,7 @@
 #include "cpu.h"
 
 // opcodes
-//lda
+// LDA
 #define INS_LDA_IM 0xA9
 #define INS_LDA_ZP 0xA5
 #define INS_LDA_ZX 0xB5
@@ -12,12 +12,18 @@
 #define INS_LDA_AY 0xB9
 #define INS_LDA_IX 0xA1
 #define INS_LDA_IY 0xB1
-
+// LDX
 #define INS_LDX_IM 0xA2
 #define INS_LDX_ZP 0xA6
 #define INS_LDX_ZY 0xB6
 #define INS_LDX_AB 0xAE
 #define INS_LDX_AY 0xBE
+// LDY
+#define INS_LDY_IM 0xA0
+#define INS_LDY_ZP 0xA4
+#define INS_LDY_ZX 0xB4
+#define INS_LDY_AB 0xAC
+#define INS_LDY_AX 0xBC
 
 // main loop
 void execute(p6502* proc, int cycles) {
@@ -41,6 +47,12 @@ void execute(p6502* proc, int cycles) {
             case INS_LDX_AB:
             case INS_LDX_AY:
                 LDX(instruction, proc, &cycles);
+            case INS_LDY_IM:
+            case INS_LDY_ZP:
+            case INS_LDY_ZX:
+            case INS_LDY_AB:
+            case INS_LDY_AX:
+                LDY(instruction, proc, &cycles);
         }
     }
 
