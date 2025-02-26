@@ -2,8 +2,9 @@
 #define common_h
 
 #include <stdint.h>
+#include <stdio.h>
 
-// #define DEBUG_TRACE
+#define DEBUG_TRACE
 
 typedef __uint8_t Byte;
 

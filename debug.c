@@ -27,8 +27,8 @@ void displayCPUStatus(p6502 proc) {
     printf("\nPC | [0x%02x] [0x%02x]\n", pcByte1, pcByte2);
     printf("SP | [0x%02x]\n", proc.cpu->SP);
     printf("AC | [0x%02x] (%d)\n", proc.cpu->AC, proc.cpu->AC);
-    printf("IX | [0x%02x]\n", proc.cpu->IX);
-    printf("IY | [0x%02x]\n", proc.cpu->IY);
+    printf("IX | [0x%02x] (%d)\n", proc.cpu->IX, proc.cpu->IX);
+    printf("IY | [0x%02x] (%d)\n", proc.cpu->IY, proc.cpu->IY);
 }
 
 void writeByte(Memory* memory, __uint16_t address, Byte data) {

@@ -4,7 +4,7 @@
 #include "architecture.h"
 #include "common.h"
 #include "debug.h"
-#include "instructions/lda.h"
+#include "instructions/instructions.h"
 
 void execute(p6502* proc, int cycles);
 

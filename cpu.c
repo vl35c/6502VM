@@ -13,6 +13,12 @@
 #define INS_LDA_IX 0xA1
 #define INS_LDA_IY 0xB1
 
+#define INS_LDX_IM 0xA2
+#define INS_LDX_ZP 0xA6
+#define INS_LDX_ZY 0xB6
+#define INS_LDX_AB 0xAE
+#define INS_LDX_AY 0xBE
+
 // main loop
 void execute(p6502* proc, int cycles) {
     while (cycles > 0) {
@@ -29,6 +35,12 @@ void execute(p6502* proc, int cycles) {
             case INS_LDA_IX:
             case INS_LDA_IY:
                 LDA(instruction, proc, &cycles);
+            case INS_LDX_IM:
+            case INS_LDX_ZP:
+            case INS_LDX_ZY:
+            case INS_LDX_AB:
+            case INS_LDX_AY:
+                LDX(instruction, proc, &cycles);
         }
     }
 
