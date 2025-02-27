@@ -35,24 +35,32 @@ void writeByte(Memory* memory, __uint16_t address, Byte data) {
     memory->data[address] = data;
 }
 
+void readByte(Memory* memory, __uint16_t address) {
+    printf("read_byte : 0x%04x -> 0x%02x\n", address, memory->data[address]);
+}
+
 static void fetchMemory(const char* code, Memory* memory, CPU* cpu) {
-    printf("%-8s 0x%04x -> 0x%04x\n  PC -> 0x%04x\n", code, cpu->PC, memory->data[cpu->PC], cpu->PC + 1);
+    printf("%-8s 0x%04x -> 0x%02x\n  PC -> 0x%04x\n", code, cpu->PC, memory->data[cpu->PC], cpu->PC + 1);
 }
 
 static void readMemory(const char* code, Memory* memory, __uint16_t address) {
-    printf("%-8s 0x%04x -> 0x%04x\n", code, address, memory->data[address]);
+    printf("%-8s 0x%04x -> 0x%02x\n", code, address, memory->data[address]);
+}
+
+static void writeMemory(const char* code, Byte data, __uint16_t address) {
+    printf("%-8s 0x%04x -> 0x%02x\n", code, address, data);
 }
 
 static void addByte(const char* code, Byte byte1, Byte byte2) {
     printf("%-8s 0x%04x +  0x%04x = 0x%04x (ZP)\n", code, byte1, byte2, (Byte)(byte1 + byte2));
 }
 
-static void addAddress(const char* code, __uint16_t address, Byte add) {
-    printf("%-8s 0x%04x +  0x%04x = 0x%04x\n", code, address, add, address + add);
+static void addAddress(const char* code, Byte add, __uint16_t address) {
+    printf("%-8s 0x%04x +  0x%02x = 0x%04x\n", code, address, add, address + add);
 }
 
-static void combineBytes(const char* code, Byte byte1, Byte byte2) {
-    printf("%-8s 0x%02x, 0x%02x -> 0x%04x\n", code, byte1, byte2, (byte2 << 8) + byte1);
+static void combineBytes(const char* code, Byte byte2, Byte byte1) {
+    printf("%-8s 0x%02x, 0x%02x -> 0x%04x\n", code, byte1, byte2, (byte1 << 8) + byte2);
 }
 
 void traceProcessor(TraceCode code, ...) {
@@ -62,6 +70,13 @@ void traceProcessor(TraceCode code, ...) {
             va_list args;
             va_start(args, code);
             readMemory("READ", proc.memory, va_arg(args, int));
+            va_end(args);
+            break;
+        }
+        case TRACE_WRITE: {
+            va_list args;
+            va_start(args, code);
+            writeMemory("WRITE", va_arg(args, int), va_arg(args, int));
             va_end(args);
             break;
         }

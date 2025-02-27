@@ -24,6 +24,14 @@
 #define INS_LDY_ZX 0xB4
 #define INS_LDY_AB 0xAC
 #define INS_LDY_AX 0xBC
+// STA
+#define INS_STA_ZP 0x85
+#define INS_STA_ZX 0x95
+#define INS_STA_AB 0x8D
+#define INS_STA_AX 0x9D
+#define INS_STA_AY 0x99
+#define INS_STA_IX 0x81
+#define INS_STA_IY 0x91
 
 // main loop
 void execute(p6502* proc, int cycles) {
@@ -53,6 +61,14 @@ void execute(p6502* proc, int cycles) {
             case INS_LDY_AB:
             case INS_LDY_AX:
                 LDY(instruction, proc, &cycles);
+            case INS_STA_ZP:
+            case INS_STA_ZX:
+            case INS_STA_AB:
+            case INS_STA_AX:
+            case INS_STA_AY:
+            case INS_STA_IX:
+            case INS_STA_IY:
+                STA(instruction, proc, &cycles);
         }
     }
 

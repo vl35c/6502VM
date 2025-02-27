@@ -55,3 +55,11 @@ __uint16_t combineBytes(Byte hi, Byte lo) {
 #endif
     return (__uint16_t)((hi << 8) + lo);
 }
+
+void write(Memory* memory, __uint16_t address, Byte data, int* cycles) {
+#ifdef DEBUG_TRACE
+    traceProcessor(TRACE_WRITE, address, data);
+#endif
+    memory->data[address] = data;
+    --*cycles;
+}
