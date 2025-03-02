@@ -17,7 +17,7 @@ void displayProcessorStatus(p6502 proc) {
 }
 
 // little endian, so offset of 1 to [0x1234] gives [0x12]
-static Byte getByte(__uint16_t bytes, int offset) {
+static Byte getByte(uint16_t bytes, int offset) {
     return (Byte)(bytes >> (8 * offset));
 }
 
@@ -31,11 +31,11 @@ void displayCPUStatus(p6502 proc) {
     printf("IY | [0x%02x] (%d)\n", proc.cpu->IY, proc.cpu->IY);
 }
 
-void writeByte(Memory* memory, __uint16_t address, Byte data) {
+void writeByte(Memory* memory, uint16_t address, Byte data) {
     memory->data[address] = data;
 }
 
-void readByte(Memory* memory, __uint16_t address) {
+void readByte(Memory* memory, uint16_t address) {
     printf("read_byte : 0x%04x -> 0x%02x\n", address, memory->data[address]);
 }
 
@@ -43,11 +43,11 @@ static void fetchMemory(const char* code, Memory* memory, CPU* cpu) {
     printf("%-8s 0x%04x -> 0x%02x\n  PC -> 0x%04x\n", code, cpu->PC, memory->data[cpu->PC], cpu->PC + 1);
 }
 
-static void readMemory(const char* code, Memory* memory, __uint16_t address) {
+static void readMemory(const char* code, Memory* memory, uint16_t address) {
     printf("%-8s 0x%04x -> 0x%02x\n", code, address, memory->data[address]);
 }
 
-static void writeMemory(const char* code, Byte data, __uint16_t address) {
+static void writeMemory(const char* code, Byte data, uint16_t address) {
     printf("%-8s 0x%04x -> 0x%02x\n", code, address, data);
 }
 
@@ -55,7 +55,7 @@ static void addByte(const char* code, Byte byte1, Byte byte2) {
     printf("%-8s 0x%04x +  0x%04x = 0x%04x (ZP)\n", code, byte1, byte2, (Byte)(byte1 + byte2));
 }
 
-static void addAddress(const char* code, Byte add, __uint16_t address) {
+static void addAddress(const char* code, Byte add, uint16_t address) {
     printf("%-8s 0x%04x +  0x%02x = 0x%04x\n", code, address, add, address + add);
 }
 

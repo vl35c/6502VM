@@ -32,6 +32,10 @@
 #define INS_STA_AY 0x99
 #define INS_STA_IX 0x81
 #define INS_STA_IY 0x91
+// STX
+#define INS_STX_ZP 0x86
+#define INS_STX_ZY 0x96
+#define INS_STX_AB 0x8E
 
 // main loop
 void execute(p6502* proc, int cycles) {
@@ -69,6 +73,10 @@ void execute(p6502* proc, int cycles) {
             case INS_STA_IX:
             case INS_STA_IY:
                 STA(instruction, proc, &cycles);
+            case INS_STX_ZP:
+            case INS_STX_ZY:
+            case INS_STX_AB:
+                STX(instruction, proc, &cycles);
         }
     }
 

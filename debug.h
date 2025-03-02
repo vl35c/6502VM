@@ -17,8 +17,8 @@ extern p6502 proc;
 
 void displayProcessorStatus(p6502 proc);
 void displayCPUStatus(p6502 proc);
-void writeByte(Memory* memory, __uint16_t address, Byte data);
-void readByte(Memory* memory, __uint16_t address);
+void writeByte(Memory* memory, uint16_t address, Byte data);
+void readByte(Memory* memory, uint16_t address);
 void traceProcessor(TraceCode code, ...);
 
 #endif

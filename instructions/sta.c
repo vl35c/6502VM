@@ -20,13 +20,13 @@ void STA(Byte instruction, p6502* proc, int* cycles) {
             Byte zpAddress = fetch(proc->memory, proc->cpu, cycles);
             Byte address = addToByte(zpAddress, proc->cpu->IX, cycles);
             Byte data = proc->cpu->AC;
-            write(proc->memory, (__uint16_t)address, data, cycles);
+            write(proc->memory, (uint16_t)address, data, cycles);
             break;
         }
         case INS_STA_AB: {
             Byte addressLo = fetch(proc->memory, proc->cpu, cycles);
             Byte addressHi = fetch(proc->memory, proc->cpu, cycles);
-            __uint16_t address = combineBytes(addressHi, addressLo);
+            uint16_t address = combineBytes(addressHi, addressLo);
             Byte data = proc->cpu->AC;
             write(proc->memory, address, data, cycles);
             break;
@@ -34,7 +34,7 @@ void STA(Byte instruction, p6502* proc, int* cycles) {
         case INS_STA_AX: {
             Byte addressLo = fetch(proc->memory, proc->cpu, cycles);
             Byte addressHi = fetch(proc->memory, proc->cpu, cycles);
-            __uint16_t address = combineBytes(addressHi, addressLo);
+            uint16_t address = combineBytes(addressHi, addressLo);
             address = addToAddress(address, proc->cpu->IX);
             --*cycles;
             Byte data = proc->cpu->AC;
@@ -44,7 +44,7 @@ void STA(Byte instruction, p6502* proc, int* cycles) {
         case INS_STA_AY: {
             Byte addressLo = fetch(proc->memory, proc->cpu, cycles);
             Byte addressHi = fetch(proc->memory, proc->cpu, cycles);
-            __uint16_t address = combineBytes(addressHi, addressLo);
+            uint16_t address = combineBytes(addressHi, addressLo);
             address = addToAddress(address, proc->cpu->IY);
             --*cycles;
             Byte data = proc->cpu->AC;
@@ -53,9 +53,9 @@ void STA(Byte instruction, p6502* proc, int* cycles) {
         }
         case INS_STA_IX: {
             Byte zpAddress = fetch(proc->memory, proc->cpu, cycles);
-            Byte addressLo = read(proc->memory, (__uint16_t)(zpAddress + 0), cycles);
-            Byte addressHi = read(proc->memory, (__uint16_t)((Byte)(zpAddress + 1)), cycles);
-            __uint16_t address = combineBytes(addressHi, addressLo);
+            Byte addressLo = read(proc->memory, (uint16_t)(zpAddress + 0), cycles);
+            Byte addressHi = read(proc->memory, (uint16_t)((Byte)(zpAddress + 1)), cycles);
+            uint16_t address = combineBytes(addressHi, addressLo);
             address = addToAddress(address, proc->cpu->IX);
             --*cycles;
             Byte data = proc->cpu->AC;
@@ -63,9 +63,9 @@ void STA(Byte instruction, p6502* proc, int* cycles) {
         }
         case INS_STA_IY: {
             Byte zpAddress = fetch(proc->memory, proc->cpu, cycles);
-            Byte addressLo = read(proc->memory, (__uint16_t)(zpAddress + 0), cycles);
-            Byte addressHi = read(proc->memory, (__uint16_t)(zpAddress + 1), cycles);
-            __uint16_t address = combineBytes(addressHi, addressLo);
+            Byte addressLo = read(proc->memory, (uint16_t)(zpAddress + 0), cycles);
+            Byte addressHi = read(proc->memory, (uint16_t)(zpAddress + 1), cycles);
+            uint16_t address = combineBytes(addressHi, addressLo);
             address = addToAddress(address, proc->cpu->IY);
             --*cycles;
             Byte data = proc->cpu->AC;

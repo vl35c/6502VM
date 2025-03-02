@@ -17,7 +17,7 @@ void LDY(Byte instruction, p6502* proc, int* cycles) {
         }
         case INS_LDY_ZP: {
             Byte address = fetch(proc->memory, proc->cpu, cycles);
-            Byte data = read(proc->memory, (__uint16_t)address, cycles);
+            Byte data = read(proc->memory, (uint16_t)address, cycles);
             proc->cpu->IY = data;
             proc->processor->ZF = (proc->cpu->IY == 0);
             proc->processor->NF = (proc->cpu->IY & 0b10000000) > 0;
@@ -35,7 +35,7 @@ void LDY(Byte instruction, p6502* proc, int* cycles) {
         case INS_LDY_AB: {
             Byte addressLo = fetch(proc->memory, proc->cpu, cycles);
             Byte addressHi = fetch(proc->memory, proc->cpu, cycles);
-            __uint16_t address = combineBytes(addressHi, addressLo);
+            uint16_t address = combineBytes(addressHi, addressLo);
             Byte data = read(proc->memory, address, cycles);
             proc->cpu->IY = data;
             proc->processor->ZF = (proc->cpu->IY == 0);
@@ -45,7 +45,7 @@ void LDY(Byte instruction, p6502* proc, int* cycles) {
         case INS_LDY_AX: {
             Byte addressLo = fetch(proc->memory, proc->cpu, cycles);
             Byte addressHi = fetch(proc->memory, proc->cpu, cycles);
-            __uint16_t address = combineBytes(addressHi, addressLo);
+            uint16_t address = combineBytes(addressHi, addressLo);
             address = addToAddress(address, proc->cpu->IX);
             crossedPage(address, proc->cpu->IX, cycles);
             Byte data = read(proc->memory, address, cycles);
