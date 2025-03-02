@@ -44,39 +44,49 @@ void execute(p6502* proc, int cycles) {
         Byte instruction = fetch(proc->memory, proc->cpu, &cycles);
         
         switch (instruction) {
-            case INS_LDA_IM:
-            case INS_LDA_ZP:
-            case INS_LDA_ZX:
-            case INS_LDA_AB:
-            case INS_LDA_AX:
-            case INS_LDA_AY:
-            case INS_LDA_IX:
-            case INS_LDA_IY:
+            case INS_LDA_IM: traceInstructionStart("LDA - Immediate");
+            case INS_LDA_ZP: traceInstructionStart("LDA - Zero Page");
+            case INS_LDA_ZX: traceInstructionStart("LDA - Zero Page X");
+            case INS_LDA_AB: traceInstructionStart("LDA - Absolute");
+            case INS_LDA_AX: traceInstructionStart("LDA - Absolute X");
+            case INS_LDA_AY: traceInstructionStart("LDA - Absolute Y");
+            case INS_LDA_IX: traceInstructionStart("LDA - Indirect X");
+            case INS_LDA_IY: traceInstructionStart("LDA - Indirect Y");
                 LDA(instruction, proc, &cycles);
-            case INS_LDX_IM:
-            case INS_LDX_ZP:
-            case INS_LDX_ZY:
-            case INS_LDX_AB:
-            case INS_LDX_AY:
+                traceInstructionEnd("LDA");
+                break;
+            case INS_LDX_IM: traceInstructionStart("LDX - Immediate");
+            case INS_LDX_ZP: traceInstructionStart("LDX - Zero Page");
+            case INS_LDX_ZY: traceInstructionStart("LDX - Zero Page Y");
+            case INS_LDX_AB: traceInstructionStart("LDX - Absolute");
+            case INS_LDX_AY: traceInstructionStart("LDX - Absolute Y");
                 LDX(instruction, proc, &cycles);
-            case INS_LDY_IM:
-            case INS_LDY_ZP:
-            case INS_LDY_ZX:
-            case INS_LDY_AB:
-            case INS_LDY_AX:
+                traceInstructionEnd("LDX");
+                break;
+            case INS_LDY_IM: traceInstructionStart("LDY - Immediate");
+            case INS_LDY_ZP: traceInstructionStart("LDY - Zero Page");
+            case INS_LDY_ZX: traceInstructionStart("LDY - Zero Page X");
+            case INS_LDY_AB: traceInstructionStart("LDY - Absolute");
+            case INS_LDY_AX: traceInstructionStart("LDY - Absolute X");
                 LDY(instruction, proc, &cycles);
-            case INS_STA_ZP:
-            case INS_STA_ZX:
-            case INS_STA_AB:
-            case INS_STA_AX:
-            case INS_STA_AY:
-            case INS_STA_IX:
-            case INS_STA_IY:
+                traceInstructionEnd("LDY");
+                break;
+            case INS_STA_ZP: traceInstructionStart("STA - Zero Page");
+            case INS_STA_ZX: traceInstructionStart("STA - Zero Page X");
+            case INS_STA_AB: traceInstructionStart("STA - Absolute");
+            case INS_STA_AX: traceInstructionStart("STA - Absolute X"); 
+            case INS_STA_AY: traceInstructionStart("STA - Absolute Y");
+            case INS_STA_IX: traceInstructionStart("STA - Indirect X");
+            case INS_STA_IY: traceInstructionStart("STA - Indirect Y");
                 STA(instruction, proc, &cycles);
-            case INS_STX_ZP:
-            case INS_STX_ZY:
-            case INS_STX_AB:
+                traceInstructionEnd("STA");
+                break;
+            case INS_STX_ZP: traceInstructionStart("STX - Zero Page");
+            case INS_STX_ZY: traceInstructionStart("STX - Zero Page Y");
+            case INS_STX_AB: traceInstructionStart("STX - Absolute");
                 STX(instruction, proc, &cycles);
+                traceInstructionEnd("STX");
+                break;
         }
     }
 

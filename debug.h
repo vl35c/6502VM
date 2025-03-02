@@ -1,6 +1,8 @@
 #ifndef debug_h
 #define debug_h
 
+#include <stdbool.h>
+
 #include "architecture.h"
 #include "common.h"
 
@@ -19,6 +21,8 @@ void displayProcessorStatus(p6502 proc);
 void displayCPUStatus(p6502 proc);
 void writeByte(Memory* memory, uint16_t address, Byte data);
 void readByte(Memory* memory, uint16_t address);
+void traceInstructionStart(const char* name);
+void traceInstructionEnd(const char* name);
 void traceProcessor(TraceCode code, ...);
 
 #endif

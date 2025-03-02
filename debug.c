@@ -4,6 +4,8 @@
 
 #include "debug.h"
 
+bool instructionInProgress = false;
+
 void displayProcessorStatus(p6502 proc) {
     printf("\n________\n");
     printf("|CF | %d|\n", proc.processor->CF);
@@ -61,6 +63,18 @@ static void addAddress(const char* code, Byte add, uint16_t address) {
 
 static void combineBytes(const char* code, Byte byte2, Byte byte1) {
     printf("%-8s 0x%02x, 0x%02x -> 0x%04x\n", code, byte1, byte2, (byte1 << 8) + byte2);
+}
+
+void traceInstructionStart(const char* name) {
+    if (instructionInProgress) { return; }
+    instructionInProgress = true;
+
+    printf("-=-=-= START: %s =-=-=-\n", name);
+}
+void traceInstructionEnd(const char* name) {
+    instructionInProgress = false;
+
+    printf("-=-=-= END: %s =-=-=-\n", name);
 }
 
 void traceProcessor(TraceCode code, ...) {
