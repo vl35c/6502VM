@@ -11,6 +11,7 @@ void LDY(Byte instruction, p6502* proc, int* cycles);
 
 void STA(Byte instruction, p6502* proc, int* cycles);
 void STX(Byte instruction, p6502* proc, int* cycles);
+void STY(Byte instruction, p6502* proc, int* cycles);
 
 void TAX(Byte instruction, p6502* proc, int* cycles);
 void TAY(Byte instruction, p6502* proc, int* cycles);

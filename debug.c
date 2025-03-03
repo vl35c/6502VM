@@ -54,7 +54,7 @@ static void writeMemory(const char* code, Byte data, uint16_t address) {
 }
 
 static void addByte(const char* code, Byte byte1, Byte byte2) {
-    printf("%-8s 0x%04x +  0x%04x = 0x%04x (ZP)\n", code, byte1, byte2, (Byte)(byte1 + byte2));
+    printf("%-8s 0x%02x +  0x%02x = 0x%02x (ZP)\n", code, byte1, byte2, byte1 + byte2);
 }
 
 static void addAddress(const char* code, Byte add, uint16_t address) {
@@ -73,12 +73,17 @@ void traceInstructionStart(const char* name) {
     if (instructionInProgress) { return; }
     instructionInProgress = true;
 
+#ifdef DEBUG_TRACE
     printf("-=-=-= START: %s =-=-=-\n", name);
+#endif
 }
+
 void traceInstructionEnd(const char* name) {
     instructionInProgress = false;
 
+#ifdef DEBUG_TRACE
     printf("-=-=-= END: %s =-=-=-\n", name);
+#endif
 }
 
 void traceProcessor(TraceCode code, ...) {

@@ -45,6 +45,7 @@
 // TYA
 #define INS_TYA_IP 0x98
 
+
 // main loop
 void execute(p6502* proc, int cycles) {
     while (cycles > 0) {
@@ -110,6 +111,7 @@ void execute(p6502* proc, int cycles) {
             case INS_TYA_IP: traceInstructionStart("TYA - Implicit");
                 TYA(instruction, proc, &cycles);
                 traceInstructionEnd("TYA");
+
                 break;
         }
     }
