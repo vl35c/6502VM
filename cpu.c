@@ -36,9 +36,15 @@
 #define INS_STX_ZP 0x86
 #define INS_STX_ZY 0x96
 #define INS_STX_AB 0x8E
-// STY
-#define INS_STY_ZP 0x84
-#define INS_STY_ZX 0x94
+// TAX
+#define INS_TAX_IP 0xAA
+// TAY
+#define INS_TAY_IP 0xA8
+// TXA
+#define INS_TXA_IP 0x8A
+// TYA
+#define INS_TYA_IP 0x98
+
 
 // main loop
 void execute(p6502* proc, int cycles) {
@@ -90,10 +96,22 @@ void execute(p6502* proc, int cycles) {
                 STX(instruction, proc, &cycles);
                 traceInstructionEnd("STX");
                 break;
-            case INS_STY_ZP: traceInstructionStart("STY - Zero Page");
-            case INS_STY_ZX: traceInstructionStart("STY - Zero Page X");
-                STY(instruction, proc, &cycles);
-                traceInstructionEnd("STY");
+            case INS_TAX_IP: traceInstructionStart("TAX - Implicit");
+                TAX(instruction, proc, &cycles);
+                traceInstructionEnd("TAX");
+                break;
+            case INS_TAY_IP: traceInstructionStart("TAY - Implicit");
+                TAY(instruction, proc, &cycles);
+                traceInstructionEnd("TAY");
+                break;
+            case INS_TXA_IP: traceInstructionStart("TXA - Implicit");
+                TXA(instruction, proc, &cycles);
+                traceInstructionEnd("TXA");
+                break;
+            case INS_TYA_IP: traceInstructionStart("TYA - Implicit");
+                TYA(instruction, proc, &cycles);
+                traceInstructionEnd("TYA");
+
                 break;
         }
     }

@@ -65,6 +65,10 @@ static void combineBytes(const char* code, Byte byte2, Byte byte1) {
     printf("%-8s 0x%02x, 0x%02x -> 0x%04x\n", code, byte1, byte2, (byte1 << 8) + byte2);
 }
 
+static void copyBytes(const char* code, const char* dest, Byte byte1) {
+    printf("%-8s 0x%02x -> %s\n", code, byte1, dest);
+}
+
 void traceInstructionStart(const char* name) {
     if (instructionInProgress) { return; }
     instructionInProgress = true;
@@ -117,6 +121,13 @@ void traceProcessor(TraceCode code, ...) {
             va_list args;
             va_start(args, code);
             combineBytes("COMBINE", va_arg(args, int), va_arg(args, int));
+            va_end(args);
+            break;
+        }
+        case TRACE_COPY: {
+            va_list args;
+            va_start(args, code);
+            copyBytes("COPY", va_arg(args, char*), va_arg(args, int));
             va_end(args);
             break;
         }
