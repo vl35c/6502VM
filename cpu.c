@@ -36,6 +36,9 @@
 #define INS_STX_ZP 0x86
 #define INS_STX_ZY 0x96
 #define INS_STX_AB 0x8E
+// STY
+#define INS_STY_ZP 0x84
+#define INS_STY_ZX 0x94
 
 // main loop
 void execute(p6502* proc, int cycles) {
@@ -86,6 +89,11 @@ void execute(p6502* proc, int cycles) {
             case INS_STX_AB: traceInstructionStart("STX - Absolute");
                 STX(instruction, proc, &cycles);
                 traceInstructionEnd("STX");
+                break;
+            case INS_STY_ZP: traceInstructionStart("STY - Zero Page");
+            case INS_STY_ZX: traceInstructionStart("STY - Zero Page X");
+                STY(instruction, proc, &cycles);
+                traceInstructionEnd("STY");
                 break;
         }
     }
