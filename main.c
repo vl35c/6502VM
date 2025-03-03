@@ -11,8 +11,8 @@ int main(void) {
     system("clear");
     init6502(&proc);
 
-    writeByte(proc.memory, 0xFFFA, 0xAA);
-    proc.cpu->AC = 0x12;
+    writeByte(proc.memory, 0xFFFA, 0x8A);
+    proc.cpu->IX = 0x12;
 
     execute(&proc, 2);
 
