@@ -11,5 +11,6 @@ uint16_t addToAddress(uint16_t address, Byte indexRegister);
 void crossedPage(uint16_t address, Byte indexRegister, int* cycles);
 uint16_t combineBytes(Byte hi, Byte lo);
 void write(Memory* memory, uint16_t address, Byte data, int* cycles);
+void copyByte(Byte src, Byte dest);
 
 #endif

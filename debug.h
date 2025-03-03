@@ -12,7 +12,8 @@ typedef enum {
     TRACE_WRITE,
     TRACE_ADD_BYTE,
     TRACE_ADD_ADDRESS,
-    TRACE_COMBINE
+    TRACE_COMBINE,
+    TRACE_COPY
 } TraceCode;
 
 extern p6502 proc;

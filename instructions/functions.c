@@ -63,3 +63,9 @@ void write(Memory* memory, uint16_t address, Byte data, int* cycles) {
     memory->data[address] = data;
     --*cycles;
 }
+
+void copyByte(Byte src, Byte dest) {
+#ifdef DEBUG_TRACE
+    traceProcessor(TRACE_COPY, src, "cpu->IX");
+#endif
+}

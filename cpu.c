@@ -36,6 +36,8 @@
 #define INS_STX_ZP 0x86
 #define INS_STX_ZY 0x96
 #define INS_STX_AB 0x8E
+// TAX
+#define INS_TAX_IP 0xAA
 
 // main loop
 void execute(p6502* proc, int cycles) {
@@ -86,6 +88,10 @@ void execute(p6502* proc, int cycles) {
             case INS_STX_AB: traceInstructionStart("STX - Absolute");
                 STX(instruction, proc, &cycles);
                 traceInstructionEnd("STX");
+                break;
+            case INS_TAX_IP: traceInstructionStart("TAX - Implicit");
+                TAX(instruction, proc, &cycles);
+                traceInstructionEnd("TAX");
                 break;
         }
     }
