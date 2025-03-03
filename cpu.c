@@ -36,6 +36,10 @@
 #define INS_STX_ZP 0x86
 #define INS_STX_ZY 0x96
 #define INS_STX_AB 0x8E
+//STY
+#define INS_STY_ZP 0x84
+#define INS_STY_ZX 0x94
+#define INS_STY_AB 0x8C
 // TAX
 #define INS_TAX_IP 0xAA
 // TAY
@@ -95,6 +99,12 @@ void execute(p6502* proc, int cycles) {
             case INS_STX_AB: traceInstructionStart("STX - Absolute");
                 STX(instruction, proc, &cycles);
                 traceInstructionEnd("STX");
+                break;
+            case INS_STY_ZP: traceInstructionStart("STY - Zero Page");
+            case INS_STY_ZX: traceInstructionStart("STY - Zero Page X");
+            case INS_STY_AB: traceInstructionStart("STY - Absolute");
+                STY(instruction, proc, &cycles);
+                traceInstructionEnd("STY");
                 break;
             case INS_TAX_IP: traceInstructionStart("TAX - Implicit");
                 TAX(instruction, proc, &cycles);
