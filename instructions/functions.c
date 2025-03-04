@@ -65,8 +65,19 @@ void write(Memory* memory, uint16_t address, Byte data, int* cycles) {
 }
 
 void copyByte(Byte src, Byte* dest, const char* destName) {
-    *dest = src;
 #ifdef DEBUG_TRACE
     traceProcessor(TRACE_COPY, src, destName);
 #endif
+    *dest = src;
+}
+
+void pushStack(Memory* memory, CPU* cpu, Byte data, int* cycles) {
+#ifdef DEBUG_TRACE
+    traceProcessor(TRACE_PUSH, cpu->SP, data);
+#endif
+    Byte stack = 0x01;
+    uint16_t address = (stack << 8) + cpu->SP;
+    memory->data[address] = data;
+    *cycles -= 2;
+    cpu->SP--;
 }

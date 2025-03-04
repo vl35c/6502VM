@@ -42,31 +42,35 @@ void readByte(Memory* memory, uint16_t address) {
 }
 
 static void fetchMemory(const char* code, Memory* memory, CPU* cpu) {
-    printf("%-8s 0x%04x -> 0x%02x\n  PC -> 0x%04x\n", code, cpu->PC, memory->data[cpu->PC], cpu->PC + 1);
+    printf("%-12s 0x%04x -> 0x%02x\n  PC -> 0x%04x\n", code, cpu->PC, memory->data[cpu->PC], cpu->PC + 1);
 }
 
 static void readMemory(const char* code, Memory* memory, uint16_t address) {
-    printf("%-8s 0x%04x -> 0x%02x\n", code, address, memory->data[address]);
+    printf("%-12s 0x%04x -> 0x%02x\n", code, address, memory->data[address]);
 }
 
 static void writeMemory(const char* code, Byte data, uint16_t address) {
-    printf("%-8s 0x%04x -> 0x%02x\n", code, address, data);
+    printf("%-12s 0x%04x -> 0x%02x\n", code, address, data);
 }
 
 static void addByte(const char* code, Byte byte1, Byte byte2) {
-    printf("%-8s 0x%02x +  0x%02x = 0x%02x (ZP)\n", code, byte1, byte2, byte1 + byte2);
+    printf("%-12s 0x%02x +  0x%02x = 0x%02x (ZP)\n", code, byte1, byte2, byte1 + byte2);
 }
 
 static void addAddress(const char* code, Byte add, uint16_t address) {
-    printf("%-8s 0x%04x +  0x%02x = 0x%04x\n", code, address, add, address + add);
+    printf("%-12s 0x%04x +  0x%02x = 0x%04x\n", code, address, add, address + add);
 }
 
 static void combineBytes(const char* code, Byte byte2, Byte byte1) {
-    printf("%-8s 0x%02x, 0x%02x -> 0x%04x\n", code, byte1, byte2, (byte1 << 8) + byte2);
+    printf("%-12s 0x%02x, 0x%02x -> 0x%04x\n", code, byte1, byte2, (byte1 << 8) + byte2);
 }
 
 static void copyBytes(const char* code, const char* dest, Byte byte1) {
-    printf("%-8s 0x%02x -> %s\n", code, byte1, dest);
+    printf("%-12s 0x%02x -> %s\n", code, byte1, dest);
+}
+
+static void pushStack(const char* code, Byte data, Byte stackPointer) {
+    printf("%-12s stack[0x%02x] = 0x%02x\n  SP -> 0x%02x\n", code, stackPointer, data, stackPointer - 1);
 }
 
 void traceInstructionStart(const char* name) {
@@ -128,6 +132,13 @@ void traceProcessor(TraceCode code, ...) {
             va_list args;
             va_start(args, code);
             copyBytes("COPY", va_arg(args, char*), va_arg(args, int));
+            va_end(args);
+            break;
+        }
+        case TRACE_PUSH: {
+            va_list args;
+            va_start(args, code);
+            pushStack("PUSH STACK", va_arg(args, int), va_arg(args, int));
             va_end(args);
             break;
         }

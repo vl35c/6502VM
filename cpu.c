@@ -40,18 +40,15 @@
 #define INS_STY_ZP 0x84
 #define INS_STY_ZX 0x94
 #define INS_STY_AB 0x8C
-// TAX
+// Transfers
 #define INS_TAX_IP 0xAA
-// TAY
 #define INS_TAY_IP 0xA8
-// TXA
 #define INS_TXA_IP 0x8A
-// TYA
 #define INS_TYA_IP 0x98
-// TSX
+// Stack Operations
 #define INS_TSX_IP 0xBA
-// TXS
 #define INS_TXS_IP 0x9A
+#define INS_PHA_IP 0x48
 
 
 // main loop
@@ -133,6 +130,10 @@ void execute(p6502* proc, int cycles) {
             case INS_TXS_IP: traceInstructionStart("TXS - Implicit");
                 TXS(instruction, proc, &cycles);
                 traceInstructionEnd("TXS");
+                break;
+            case INS_PHA_IP: traceInstructionStart("PHA - Implicit");
+                PHA(instruction, proc, &cycles);
+                traceInstructionEnd("PHA");
                 break;
             default:
                 printf("UNKNOWN OPCODE\n");
