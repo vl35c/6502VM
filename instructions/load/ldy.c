@@ -1,4 +1,4 @@
-#include "instructions.h"
+#include "../instructions.h"
 
 #define INS_LDY_IM 0xA0
 #define INS_LDY_ZP 0xA4

@@ -1,4 +1,4 @@
-#include "instructions.h"
+#include "../instructions.h"
 
 #define INS_TAY_IP 0xA8
 

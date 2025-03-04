@@ -1,4 +1,4 @@
-#include "instructions.h"
+#include "../instructions.h"
 
 #define INS_STA_ZP 0x85
 #define INS_STA_ZX 0x95

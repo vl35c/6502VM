@@ -1,4 +1,4 @@
-#include "instructions.h"
+#include "../instructions.h"
 
 void LDA(Byte instruction, p6502* proc, int* cycles) {
     #define INS_LDA_IM 0xA9
