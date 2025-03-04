@@ -17,5 +17,6 @@ void write(Memory* memory, uint16_t address, Byte data, int* cycles);
 void copyByte(Byte src, Byte* dest, const char* destName);
 
 void pushStack(Memory* memory, CPU* cpu, Byte data, int* cycles);
+Byte flagsToByte(Processor p);
 
 #endif

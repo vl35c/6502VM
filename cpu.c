@@ -49,7 +49,7 @@
 #define INS_TSX_IP 0xBA
 #define INS_TXS_IP 0x9A
 #define INS_PHA_IP 0x48
-
+#define INS_PHP_IP 0x08
 
 // main loop
 void execute(p6502* proc, int cycles) {
@@ -134,6 +134,10 @@ void execute(p6502* proc, int cycles) {
             case INS_PHA_IP: traceInstructionStart("PHA - Implicit");
                 PHA(instruction, proc, &cycles);
                 traceInstructionEnd("PHA");
+                break;
+            case INS_PHP_IP: traceInstructionStart("PHP - Implicit");
+                PHP(instruction, proc, &cycles);
+                traceInstructionEnd("PHP");
                 break;
             default:
                 printf("UNKNOWN OPCODE\n");

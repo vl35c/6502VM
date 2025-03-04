@@ -81,3 +81,16 @@ void pushStack(Memory* memory, CPU* cpu, Byte data, int* cycles) {
     *cycles -= 2;
     cpu->SP--;
 }
+
+Byte flagsToByte(Processor p) {
+    Byte data = 0x00;
+    data += p.CF << 6;
+    data += p.ZF << 5;
+    data += p.ID << 4;
+    data += p.DM << 3;
+    data += p.BC << 2;
+    data += p.OF << 1;
+    data += p.NF << 0;
+    
+    return data;
+}
