@@ -18,4 +18,7 @@ void TAY(Byte instruction, p6502* proc, int* cycles);
 void TXA(Byte instruction, p6502* proc, int* cycles);
 void TYA(Byte instruction, p6502* proc, int* cycles);
 
+void TSX(Byte instruction, p6502* proc, int* cycles);
+void TXS(Byte instruction, p6502* proc, int* cycles);
+
 #endif

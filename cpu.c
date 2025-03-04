@@ -48,6 +48,10 @@
 #define INS_TXA_IP 0x8A
 // TYA
 #define INS_TYA_IP 0x98
+// TSX
+#define INS_TSX_IP 0xBA
+// TXS
+#define INS_TXS_IP 0x9A
 
 
 // main loop
@@ -121,8 +125,17 @@ void execute(p6502* proc, int cycles) {
             case INS_TYA_IP: traceInstructionStart("TYA - Implicit");
                 TYA(instruction, proc, &cycles);
                 traceInstructionEnd("TYA");
-
                 break;
+            case INS_TSX_IP: traceInstructionStart("TSX - Implicit");
+                TSX(instruction, proc, &cycles);
+                traceInstructionEnd("TSX");
+                break;
+            case INS_TXS_IP: traceInstructionStart("TXS - Implicit");
+                TXS(instruction, proc, &cycles);
+                traceInstructionEnd("TXS");
+                break;
+            default:
+                printf("UNKNOWN OPCODE\n");
         }
     }
 
