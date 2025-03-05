@@ -82,6 +82,17 @@ void pushStack(Memory* memory, CPU* cpu, Byte data, int* cycles) {
     cpu->SP--;
 }
 
+Byte pullStack(Memory* memory, CPU* cpu, int* cycles) {
+#ifdef DEBUG_TRACE
+    traceProcessor(TRACE_PULL);
+#endif
+    Byte addressLo = proc.cpu->SP;
+    uint16_t address = combineBytes(0x01, addressLo);
+    Byte data = read(memory, address, cycles);
+    write(memory, address, 0x00, cycles);
+    return data;
+}
+
 Byte flagsToByte(Processor p) {
     Byte data = 0x00;
     data += p.CF << 6;

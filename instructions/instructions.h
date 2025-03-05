@@ -22,5 +22,6 @@ void TSX(Byte instruction, p6502* proc, int* cycles);
 void TXS(Byte instruction, p6502* proc, int* cycles);
 void PHA(Byte instruction, p6502* proc, int* cycles);
 void PHP(Byte instruction, p6502* proc, int* cycles);
+void PLA(Byte instruction, p6502* proc, int* cycles);
 
 #endif

@@ -142,6 +142,10 @@ void traceProcessor(TraceCode code, ...) {
             va_end(args);
             break;
         }
+        case TRACE_PULL: {
+            printf("PULL STACK:\n");
+            break;
+        }
         default:
             return;
     }
