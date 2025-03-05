@@ -105,3 +105,13 @@ Byte flagsToByte(Processor p) {
     
     return data;
 }
+
+void byteToFlags(Byte data, Processor* p) {
+    p->NF = data >> 0;
+    p->OF = data >> 1;
+    p->BC = data >> 2;
+    p->DM = data >> 3;
+    p->ID = data >> 4;
+    p->ZF = data >> 5;
+    p->CF = data >> 6;
+}

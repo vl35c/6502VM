@@ -51,6 +51,7 @@
 #define INS_PHA_IP 0x48
 #define INS_PHP_IP 0x08
 #define INS_PLA_IP 0x68
+#define INS_PLP_IP 0x28
 
 // main loop
 void execute(p6502* proc, int cycles) {
@@ -143,6 +144,10 @@ void execute(p6502* proc, int cycles) {
             case INS_PLA_IP: traceInstructionStart("PLA - Implicit");
                 PLA(instruction, proc, &cycles);
                 traceInstructionEnd("PLA");
+                break;
+            case INS_PLP_IP: traceInstructionStart("PLP - Implicit");
+                PLP(instruction, proc, &cycles);
+                traceInstructionEnd("PLP");
                 break;
             default:
                 printf("UNKNOWN OPCODE\n");

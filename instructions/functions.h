@@ -19,5 +19,6 @@ void copyByte(Byte src, Byte* dest, const char* destName);
 void pushStack(Memory* memory, CPU* cpu, Byte data, int* cycles);
 Byte pullStack(Memory* memory, CPU* cpu, int* cycles);
 Byte flagsToByte(Processor p);
+void byteToFlags(Byte data, Processor* p);
 
 #endif
