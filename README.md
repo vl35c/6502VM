@@ -28,4 +28,5 @@ a - absolute
 ax - absolute X
 ay - absolute Y
 ix - indirect X
-iy - indirec
+iy - indirect Y
+I - implicit
