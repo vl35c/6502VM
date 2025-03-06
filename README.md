@@ -19,3 +19,13 @@ Instructions
 | D |   |   |AND a|AND ax|   |   |   |   |STA a|STA ax|LDA a|LDA ax|   |   |   |   |
 | E |   |   |   |   |   |   |   |   |STX a|   |LDX a|LDX ay|   |   |   |   |
 | F |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
+
+i - immediate
+0 - zero page
+0x - zero page X
+0y - zero page Y
+a - absolute
+ax - absolute X
+ay - absolute Y
+ix - indirect X
+iy - indirec
