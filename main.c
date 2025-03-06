@@ -11,11 +11,15 @@ int main(void) {
     system("clear");
     init6502(&proc);
 
-    writeByte(proc.memory, 0xFFFA, 0x28);
-    writeByte(proc.memory, 0x01FF, 0x48);
-    proc.cpu->SP = 0xFE;
+    writeByte(proc.memory, 0xFFFA, 0x31);
+    writeByte(proc.memory, 0xFFFB, 0x11);
+    writeByte(proc.memory, 0x0012, 0x34);
+    writeByte(proc.memory, 0x0013, 0x12);
+    writeByte(proc.memory, 0x1234, 0xFF);
+    proc.cpu->AC = 0x35;
+    proc.cpu->IY = 0xFF;
 
-    execute(&proc, 4);
+    execute(&proc, 5);
 
     displayCPUStatus(proc);
     displayProcessorStatus(proc);

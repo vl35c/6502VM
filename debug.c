@@ -73,6 +73,10 @@ static void pushStack(const char* code, Byte data, Byte stackPointer) {
     printf("%-12s stack[0x%02x] = 0x%02x\n  SP -> 0x%02x\n", code, stackPointer, data, stackPointer - 1);
 }
 
+static void and(const char* code, Byte byte2, Byte byte1) {
+    printf("%-12s 0x%02x & 0x%02x = 0x%02x\n", code, byte1, byte2, byte1 & byte2);
+}
+
 void traceInstructionStart(const char* name) {
     if (instructionInProgress) { return; }
     instructionInProgress = true;
@@ -144,6 +148,13 @@ void traceProcessor(TraceCode code, ...) {
         }
         case TRACE_PULL: {
             printf("PULL STACK:\n");
+            break;
+        }
+        case TRACE_AND: {
+            va_list args;
+            va_start(args, code);
+            and("AND", va_arg(args, int), va_arg(args, int));
+            va_end(args);
             break;
         }
         default:

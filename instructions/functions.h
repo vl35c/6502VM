@@ -21,4 +21,6 @@ Byte pullStack(Memory* memory, CPU* cpu, int* cycles);
 Byte flagsToByte(Processor p);
 void byteToFlags(Byte data, Processor* p);
 
+Byte and(Byte byte1, Byte byte2);
+
 #endif

@@ -115,3 +115,10 @@ void byteToFlags(Byte data, Processor* p) {
     p->ZF = data >> 5;
     p->CF = data >> 6;
 }
+
+Byte and(Byte byte1, Byte byte2) {
+#ifdef DEBUG_TRACE
+    traceProcessor(TRACE_AND, byte1, byte2);
+#endif
+    return byte1 & byte2;
+}

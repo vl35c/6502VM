@@ -52,6 +52,15 @@
 #define INS_PHP_IP 0x08
 #define INS_PLA_IP 0x68
 #define INS_PLP_IP 0x28
+// AND
+#define INS_AND_IM 0x29
+#define INS_AND_ZP 0x25
+#define INS_AND_ZX 0x35
+#define INS_AND_AB 0x2D
+#define INS_AND_AX 0x3D
+#define INS_AND_AY 0x39
+#define INS_AND_IX 0x21
+#define INS_AND_IY 0x31
 
 // main loop
 void execute(p6502* proc, int cycles) {
@@ -148,6 +157,17 @@ void execute(p6502* proc, int cycles) {
             case INS_PLP_IP: traceInstructionStart("PLP - Implicit");
                 PLP(instruction, proc, &cycles);
                 traceInstructionEnd("PLP");
+                break;
+            case INS_AND_IM: traceInstructionStart("AND - Immediate");
+            case INS_AND_ZP: traceInstructionStart("AND - Zero Page");
+            case INS_AND_ZX: traceInstructionStart("AND - Zero Page X");
+            case INS_AND_AB: traceInstructionStart("AND - Absolute");
+            case INS_AND_AX: traceInstructionStart("AND - Absolute X");
+            case INS_AND_AY: traceInstructionStart("AND - Absolute Y");
+            case INS_AND_IX: traceInstructionStart("AND - Indirect X");
+            case INS_AND_IY: traceInstructionStart("AND - Absolute Y");
+                AND(instruction, proc, &cycles);
+                traceInstructionEnd("AND");
                 break;
             default:
                 printf("UNKNOWN OPCODE\n");

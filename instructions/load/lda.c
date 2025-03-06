@@ -68,10 +68,10 @@ void LDA(Byte instruction, p6502* proc, int* cycles) {
             Byte addressHi = fetch(proc->memory, proc->cpu, cycles);
             // combines bytes into a 2 byte address
             uint16_t address = combineBytes(addressHi, addressLo);
-            // adds address and Index Register X together
-            address = addToAddress(address, proc->cpu->IX);
             // checks if the addition crossed a page, which uses an extra cycle
             crossedPage(address, proc->cpu->IX, cycles);
+            // adds address and Index Register X together
+            address = addToAddress(address, proc->cpu->IX);
             // reads data from the calculated address and loads into AC
             Byte data = read(proc->memory, address, cycles);
             proc->cpu->AC = data;
@@ -85,8 +85,8 @@ void LDA(Byte instruction, p6502* proc, int* cycles) {
             Byte addressLo = fetch(proc->memory, proc->cpu, cycles);
             Byte addressHi = fetch(proc->memory, proc->cpu, cycles);
             uint16_t address = combineBytes(addressHi, addressLo);
-            address = addToAddress(address, proc->cpu->IY);
             crossedPage(address, proc->cpu->IY, cycles);
+            address = addToAddress(address, proc->cpu->IY);
             Byte data = read(proc->memory, address, cycles);
             proc->cpu->AC = data;
             proc->processor->ZF = (proc->cpu->AC == 0);
@@ -116,11 +116,11 @@ void LDA(Byte instruction, p6502* proc, int* cycles) {
         case INS_LDA_IY: {
             // fetchs byte to be low byte of a zero page address
             Byte zpByte = fetch(proc->memory, proc->cpu, cycles);
+            // checks if either new address or next address has crossed page, if so uses an extra cycle
+            crossedPage(zpByte, proc->cpu->IY + 0, cycles);
+            crossedPage(zpByte, proc->cpu->IY + 1, cycles);
             // adds Index Register Y to byte WITHOUT wraparound
             uint16_t zpAddress = addToAddress((uint16_t)zpByte, proc->cpu->IY);
-            // checks if either new address or next address has crossed page, if so uses an extra cycle
-            crossedPage(zpAddress, proc->cpu->IY + 0, cycles);
-            crossedPage(zpAddress, proc->cpu->IY + 1, cycles);
             // reads byte to be low byte of address
             Byte addressLo = read(proc->memory, zpAddress, cycles);
             // reads byte to be high byte of address

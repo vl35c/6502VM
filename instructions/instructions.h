@@ -25,4 +25,6 @@ void PHP(Byte instruction, p6502* proc, int* cycles);
 void PLA(Byte instruction, p6502* proc, int* cycles);
 void PLP(Byte instruction, p6502* proc, int* cycles);
 
+void AND(Byte instruction, p6502* proc, int* cycles);
+
 #endif
