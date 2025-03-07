@@ -23,5 +23,6 @@ void byteToFlags(Byte data, Processor* p);
 
 Byte and(Byte byte1, Byte byte2);
 Byte eor(Byte byte1, Byte byte2);
+Byte ora(Byte byte1, Byte byte2);
 
 #endif

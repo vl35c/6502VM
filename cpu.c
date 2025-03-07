@@ -70,6 +70,15 @@
 #define INS_EOR_AY 0x59
 #define INS_EOR_IX 0x41
 #define INS_EOR_IY 0x51
+// ORA
+#define INS_ORA_IM 0x09
+#define INS_ORA_ZP 0x05
+#define INS_ORA_ZX 0x15
+#define INS_ORA_AB 0x0D
+#define INS_ORA_AX 0x1D
+#define INS_ORA_AY 0x19
+#define INS_ORA_IX 0x01
+#define INS_ORA_IY 0x11
 
 // main loop
 void execute(p6502* proc, int cycles) {
@@ -188,6 +197,17 @@ void execute(p6502* proc, int cycles) {
             case INS_EOR_IY: traceInstructionStart("EOR - Indirect Y");
                 EOR(instruction, proc, &cycles);
                 traceInstructionEnd("EOR");
+                break;
+            case INS_ORA_IM: traceInstructionStart("ORA - Immediate");
+            case INS_ORA_ZP: traceInstructionStart("ORA - Zero Page");
+            case INS_ORA_ZX: traceInstructionStart("ORA - Zero Page X");
+            case INS_ORA_AB: traceInstructionStart("ORA - Absolute");
+            case INS_ORA_AX: traceInstructionStart("ORA - Absolute X");
+            case INS_ORA_AY: traceInstructionStart("ORA - Absolute Y");
+            case INS_ORA_IX: traceInstructionStart("ORA - Indirect X");
+            case INS_ORA_IY: traceInstructionStart("ORA - Indirect Y");
+                ORA(instruction, proc, &cycles);
+                traceInstructionEnd("ORA");
                 break;
             default:
                 printf("UNKNOWN OPCODE\n");

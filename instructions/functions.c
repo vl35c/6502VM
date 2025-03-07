@@ -129,3 +129,10 @@ Byte eor(Byte byte1, Byte byte2) {
 #endif
     return byte1 ^ byte2;
 }
+
+Byte ora(Byte byte1, Byte byte2) {
+#ifdef DEBUG_TRACE
+    traceProcessor(TRACE_ORA, byte1, byte2);
+#endif
+    return byte1 | byte2;
+}

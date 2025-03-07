@@ -27,5 +27,6 @@ void PLP(Byte instruction, p6502* proc, int* cycles);
 
 void AND(Byte instruction, p6502* proc, int* cycles);
 void EOR(Byte instruction, p6502* proc, int* cycles);
+void ORA(Byte instruction, p6502* proc, int* cycles);
 
 #endif
