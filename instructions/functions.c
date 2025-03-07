@@ -122,3 +122,10 @@ Byte and(Byte byte1, Byte byte2) {
 #endif
     return byte1 & byte2;
 }
+
+Byte eor(Byte byte1, Byte byte2) {
+#ifdef DEBUG_TRACE
+    traceProcessor(TRACE_EOR, byte1, byte2);
+#endif
+    return byte1 ^ byte2;
+}

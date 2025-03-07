@@ -61,6 +61,15 @@
 #define INS_AND_AY 0x39
 #define INS_AND_IX 0x21
 #define INS_AND_IY 0x31
+// EOR
+#define INS_EOR_IM 0x49
+#define INS_EOR_ZP 0x45
+#define INS_EOR_ZX 0x55
+#define INS_EOR_AB 0x4D
+#define INS_EOR_AX 0x5D
+#define INS_EOR_AY 0x59
+#define INS_EOR_IX 0x41
+#define INS_EOR_IY 0x51
 
 // main loop
 void execute(p6502* proc, int cycles) {
@@ -168,6 +177,17 @@ void execute(p6502* proc, int cycles) {
             case INS_AND_IY: traceInstructionStart("AND - Absolute Y");
                 AND(instruction, proc, &cycles);
                 traceInstructionEnd("AND");
+                break;
+            case INS_EOR_IM: traceInstructionStart("EOR - Immediate");
+            case INS_EOR_ZP: traceInstructionStart("EOR - Zero Page");
+            case INS_EOR_ZX: traceInstructionStart("EOR - Zero Page X");
+            case INS_EOR_AB: traceInstructionStart("EOR - Absolute");
+            case INS_EOR_AX: traceInstructionStart("EOR - Absolute X");
+            case INS_EOR_AY: traceInstructionStart("EOR - Absolute Y");
+            case INS_EOR_IX: traceInstructionStart("EOR - Indirect X");
+            case INS_EOR_IY: traceInstructionStart("EOR - Indirect Y");
+                EOR(instruction, proc, &cycles);
+                traceInstructionEnd("EOR");
                 break;
             default:
                 printf("UNKNOWN OPCODE\n");

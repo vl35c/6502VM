@@ -77,6 +77,10 @@ static void and(const char* code, Byte byte2, Byte byte1) {
     printf("%-12s 0x%02x & 0x%02x = 0x%02x\n", code, byte1, byte2, byte1 & byte2);
 }
 
+static void eor(const char* code, Byte byte2, Byte byte1) {
+    printf("%-12s 0x%02x ^ 0x%02x = 0x%02x\n", code, byte1, byte2, byte1 ^ byte2);
+}
+
 void traceInstructionStart(const char* name) {
     if (instructionInProgress) { return; }
     instructionInProgress = true;
@@ -154,6 +158,13 @@ void traceProcessor(TraceCode code, ...) {
             va_list args;
             va_start(args, code);
             and("AND", va_arg(args, int), va_arg(args, int));
+            va_end(args);
+            break;
+        }
+        case TRACE_EOR: {
+            va_list args;
+            va_start(args, code);
+            eor("XOR", va_arg(args, int), va_arg(args, int));
             va_end(args);
             break;
         }
