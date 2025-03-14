@@ -79,6 +79,9 @@
 #define INS_ORA_AY 0x19
 #define INS_ORA_IX 0x01
 #define INS_ORA_IY 0x11
+// BIT
+#define INS_BIT_ZP 0x24
+#define INS_BIT_AB 0x2C
 
 // main loop
 void execute(p6502* proc, int cycles) {
@@ -208,6 +211,11 @@ void execute(p6502* proc, int cycles) {
             case INS_ORA_IY: traceInstructionStart("ORA - Indirect Y");
                 ORA(instruction, proc, &cycles);
                 traceInstructionEnd("ORA");
+                break;
+            case INS_BIT_ZP: traceInstructionStart("BIT - Zero Page");
+            case INS_BIT_AB: traceInstructionStart("BIT - Absolute");
+                BIT(instruction, proc, &cycles);
+                traceInstructionEnd("BIT");
                 break;
             default:
                 printf("UNKNOWN OPCODE\n");
