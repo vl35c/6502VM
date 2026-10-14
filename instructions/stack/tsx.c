@@ -1,10 +1,8 @@
 #include "../instructions.h"
 
-#define INS_STX_IP 0xBA
-
 void TSX(Byte instruction, p6502* proc, int* cycles) {
     switch (instruction) {
-        case INS_STX_IP: {
+        case INS_TSX_IP: {
             Byte addressLo = proc->cpu->SP;
             Word address = combineBytes(0x01, addressLo);
             Byte data = read(proc->memory, address, cycles);

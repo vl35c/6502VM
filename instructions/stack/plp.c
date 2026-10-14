@@ -1,7 +1,5 @@
 #include "../instructions.h"
 
-#define INS_PLP_IP 0x28
-
 void PLP(Byte instruction, p6502* proc, int* cycles) {
     switch (instruction) {
         case INS_PLP_IP: {

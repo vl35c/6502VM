@@ -1,7 +1,5 @@
 #include "../instructions.h"
 
-#define INS_PLA_IP 0x68
-
 void PLA(Byte instruction, p6502* proc, int* cycles) {
     switch (instruction) {
         case INS_PLA_IP: {

@@ -1,7 +1,5 @@
 #include "../instructions.h"
 
-#define INS_TXS_IP 0x9A
-
 void TXS(Byte instruction, p6502* proc, int* cycles) {
     switch (instruction) {
         case INS_TXS_IP: {

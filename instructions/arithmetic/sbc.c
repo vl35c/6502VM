@@ -1,14 +1,5 @@
 #include "../instructions.h"
 
-#define INS_SBC_IM 0xE9
-#define INS_SBC_ZP 0xE5
-#define INS_SBC_ZX 0xF5
-#define INS_SBC_AB 0xED
-#define INS_SBC_AX 0xFD
-#define INS_SBC_AY 0xF9
-#define INS_SBC_IX 0xE1
-#define INS_SBC_IY 0xF1
-
 static void _sbc(Byte data, p6502* proc) {
     Word result = sub(data, proc);                                  // subtract byte from AC
     if ((result & 0b100000000) > 0) { proc->processor->OF = 0; }    // clear OF if overflow in bit 8

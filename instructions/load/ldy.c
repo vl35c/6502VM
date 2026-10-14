@@ -1,11 +1,5 @@
 #include "../instructions.h"
 
-#define INS_LDY_IM 0xA0
-#define INS_LDY_ZP 0xA4
-#define INS_LDY_ZX 0xB4
-#define INS_LDY_AB 0xAC
-#define INS_LDY_AX 0xBC
-
 static void _ldy(Byte data, p6502* proc) {
     proc->cpu->IY = data;
     proc->processor->ZF = (proc->cpu->IY == 0);

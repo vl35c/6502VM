@@ -1,7 +1,5 @@
 #include "../instructions.h"
 
-#define INS_TXA_IP 0x8A
-
 void TXA(Byte instruction, p6502* proc, int* cycles) {
     switch(instruction) {
         case INS_TXA_IP: {

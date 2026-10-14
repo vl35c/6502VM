@@ -1,11 +1,5 @@
 #include "../instructions.h"
 
-#define INS_LDX_IM 0xA2
-#define INS_LDX_ZP 0xA6
-#define INS_LDX_ZY 0xB6
-#define INS_LDX_AB 0xAE
-#define INS_LDX_AY 0xBE
-
 static void _ldx(Byte data, p6502* proc) {
     proc->cpu->IX = data;
     proc->processor->ZF = (proc->cpu->IX == 0);

@@ -1,9 +1,5 @@
 #include "../instructions.h"
 
-#define INS_STX_ZP 0x86
-#define INS_STX_ZY 0x96
-#define INS_STX_AB 0x8E
-
 void STX(Byte instruction, p6502* proc, int* cycles) {
     switch (instruction) {
         case INS_STX_ZP: {

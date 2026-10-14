@@ -1,8 +1,5 @@
 #include "../instructions.h"
 
-#define INS_BIT_ZP 0x24
-#define INS_BIT_AB 0x2C
-
 static void _bit(Byte data, p6502* proc) {
     Byte result = and(proc->cpu->AC, data);
     proc->processor->ZF = result == 0;

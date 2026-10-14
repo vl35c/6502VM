@@ -1,7 +1,5 @@
 #include "../instructions.h"
 
-#define INS_TYA_IP 0x98
-
 void TYA(Byte instruction, p6502* proc, int* cycles) {
     switch(instruction) {
         case INS_TYA_IP: {

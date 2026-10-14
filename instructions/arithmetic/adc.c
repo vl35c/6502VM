@@ -1,14 +1,5 @@
 #include "../instructions.h"
 
-#define INS_ADC_IM 0x69
-#define INS_ADC_ZP 0x65
-#define INS_ADC_ZX 0x75
-#define INS_ADC_AB 0x6D
-#define INS_ADC_AX 0x7D
-#define INS_ADC_AY 0x79
-#define INS_ADC_IX 0x61
-#define INS_ADC_IY 0x71
-
 static void _adc(Byte byte, p6502* proc) {
     Word result = add(byte, proc);                                  // add byte to AC
     if ((result & 0b100000000) > 0) { proc->processor->OF = 1; }    // check if bit 8 set

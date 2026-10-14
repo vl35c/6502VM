@@ -1,14 +1,5 @@
 #include "../instructions.h"
 
-#define INS_EOR_IM 0x49
-#define INS_EOR_ZP 0x45
-#define INS_EOR_ZX 0x55
-#define INS_EOR_AB 0x4D
-#define INS_EOR_AX 0x5D
-#define INS_EOR_AY 0x59
-#define INS_EOR_IX 0x41
-#define INS_EOR_IY 0x51
-
 static void _eor(Byte data, p6502* proc) {
     Byte result = eor(proc->cpu->AC, data);
     proc->cpu->AC = result;

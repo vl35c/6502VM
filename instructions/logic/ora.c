@@ -1,14 +1,5 @@
 #include "../instructions.h"
 
-#define INS_ORA_IM 0x09
-#define INS_ORA_ZP 0x05
-#define INS_ORA_ZX 0x15
-#define INS_ORA_AB 0x0D
-#define INS_ORA_AX 0x1D
-#define INS_ORA_AY 0x19
-#define INS_ORA_IX 0x01
-#define INS_ORA_IY 0x11
-
 static void _ora(Byte data, p6502* proc) {
     Byte result = ora(proc->cpu->AC, data);
     proc->cpu->AC = result;

@@ -1,13 +1,5 @@
 #include "../instructions.h"
 
-#define INS_STA_ZP 0x85
-#define INS_STA_ZX 0x95
-#define INS_STA_AB 0x8D
-#define INS_STA_AX 0x9D
-#define INS_STA_AY 0x99
-#define INS_STA_IX 0x81
-#define INS_STA_IY 0x91
-
 void STA(Byte instruction, p6502* proc, int* cycles) {
     switch (instruction) {
         case INS_STA_ZP: {

@@ -1,14 +1,5 @@
 #include "../instructions.h"
 
-#define INS_LDA_IM 0xA9
-#define INS_LDA_ZP 0xA5
-#define INS_LDA_ZX 0xB5
-#define INS_LDA_AB 0xAD
-#define INS_LDA_AX 0xBD
-#define INS_LDA_AY 0xB9
-#define INS_LDA_IX 0xA1
-#define INS_LDA_IY 0xB1
-
 static void _lda(Byte data, p6502* proc) {
     proc->cpu->AC = data;
     proc->processor->ZF = (proc->cpu->AC == 0);

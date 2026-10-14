@@ -1,7 +1,5 @@
 #include "../instructions.h"
 
-#define INS_TAX_IP 0xAA
-
 void TAX(Byte instruction, p6502* proc, int* cycles) {
     switch(instruction) {
         case INS_TAX_IP: {

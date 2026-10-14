@@ -1,14 +1,5 @@
 #include "../instructions.h"
 
-#define INS_AND_IM 0x29
-#define INS_AND_ZP 0x25
-#define INS_AND_ZX 0x35
-#define INS_AND_AB 0x2D
-#define INS_AND_AX 0x3D
-#define INS_AND_AY 0x39
-#define INS_AND_IX 0x21
-#define INS_AND_IY 0x31
-
 static void _and(Byte data, p6502* proc) {
     Byte sum = and(proc->cpu->AC, data);
     proc->cpu->AC = sum;

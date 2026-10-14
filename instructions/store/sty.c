@@ -1,9 +1,5 @@
 #include "../instructions.h"
 
-#define INS_STY_ZP 0x84
-#define INS_STY_ZX 0x94
-#define INS_STY_AB 0x8C
-
 void STY(Byte instruction, p6502* proc, int* cycles) {
     switch(instruction) {
         case INS_STY_ZP: {
