@@ -10,12 +10,11 @@
 #define INS_ADC_IY 0x71
 
 static void _adc(Byte byte, p6502* proc) {
-    // common functionality
-    Byte result = add(byte, proc->cpu);                 // add byte to AC
-    proc->processor->OF = (result & 0b10000000) > 0;    // check if 8th bit set
-    proc->processor->ZF = result == 0;                  // check if result == 0
-    proc->processor->NF = (result & 0b1000000) > 0;     // check if 7th bit set (negative check)
-    proc->cpu->AC = (Byte)result;
+    Word result = add(byte, proc);                                  // add byte to AC
+    if ((result & 0b100000000) > 0) { proc->processor->OF = 1; }    // check if bit 8 set
+    proc->processor->ZF = result == 0;                              // check if result == 0
+    proc->processor->NF = (result & 0b10000000) > 0;                // check if bit 7 set (negative check)
+    proc->cpu->AC = (Byte)result;                                   // store result in AC
 }
 
 void ADC(Byte instruction, p6502* proc, int* cycles) {

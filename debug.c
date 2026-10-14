@@ -85,8 +85,12 @@ static void ora(const char* code, Byte byte2, Byte byte1) {
     printf("%-12s 0x%02x | 0x%02x = 0x%02x\n", code, byte1, byte2, byte1 | byte2);
 }
 
-static void add(const char* code, Byte byte, Byte ac) {
-    printf("%-12s 0x%02x + 0x%02x = %02x\n", code, byte, ac, (Byte)(byte + ac));
+static void add(const char* code, Bit carry, Byte ac, Byte byte) {
+    printf("%-12s 0x%02x + 0x%02x + 0b%d = 0x%02x\n", code, byte, ac, carry, (Byte)(byte + ac + carry));
+}
+
+static void sub(const char* code, Bit carry, Byte ac, Byte byte) {
+    printf("%-12s 0x%02x - 0x%02x - 0b%d = 0x%02x\n", code, byte, ac, carry, (Byte)(byte - ac - carry));
 }
 
 void traceInstructionStart(const char* name) {
@@ -186,7 +190,14 @@ void traceProcessor(TraceCode code, ...) {
         case TRACE_ADD: {
             va_list args;
             va_start(args, code);
-            add("ADD", va_arg(args, int), va_arg(args, int));
+            add("ADD", va_arg(args, int), va_arg(args, int), va_arg(args, int));
+            va_end(args);
+            break;
+        }
+        case TRACE_SUB: {
+            va_list args;
+            va_start(args, code);
+            sub("SUB", va_arg(args, int), va_arg(args, int), va_arg(args, int));
             va_end(args);
             break;
         }

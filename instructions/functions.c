@@ -137,9 +137,16 @@ Byte ora(Byte byte1, Byte byte2) {
     return byte1 | byte2;
 }
 
-Byte add(Byte byte, CPU* cpu) {
+Word add(Byte byte, p6502* proc) {
 #ifdef DEBUG_TRACE
-    traceProcessor(TRACE_ADD, byte, cpu->AC);
+    traceProcessor(TRACE_ADD, byte, proc->cpu->AC, proc->processor->CF);
 #endif
-    return cpu->AC + byte;
+    return proc->cpu->AC + byte + proc->processor->CF;
+}
+
+Word sub(Byte byte, p6502* proc) {
+#ifdef DEBUG_TRACE
+    traceProcessor(TRACE_SUB, byte, proc->cpu->AC, !proc->processor->CF);
+#endif
+    return proc->cpu->AC - byte - !proc->processor->CF;
 }

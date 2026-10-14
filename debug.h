@@ -19,7 +19,8 @@ typedef enum {
     TRACE_AND,
     TRACE_EOR,
     TRACE_ORA,
-    TRACE_ADD
+    TRACE_ADD,
+    TRACE_SUB
 } TraceCode;
 
 extern p6502 proc;

@@ -6,6 +6,7 @@
 
 #define DEBUG_TRACE
 
+typedef bool Bit;
 typedef uint8_t Byte;
 typedef uint16_t Word;
 

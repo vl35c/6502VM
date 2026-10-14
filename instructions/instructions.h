@@ -32,5 +32,6 @@ void ORA(Byte instruction, p6502* proc, int* cycles);
 void BIT(Byte instruction, p6502* proc, int* cycles);
 
 void ADC(Byte instruction, p6502* proc, int* cycles);
+void SBC(Byte instruction, p6502* proc, int* cycles);
 
 #endif

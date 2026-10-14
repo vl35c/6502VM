@@ -91,7 +91,15 @@
 #define INS_ADC_AY 0x79
 #define INS_ADC_IX 0x61
 #define INS_ADC_IY 0x71
-
+// SBC
+#define INS_SBC_IM 0xE9
+#define INS_SBC_ZP 0xE5
+#define INS_SBC_ZX 0xF5
+#define INS_SBC_AB 0xED
+#define INS_SBC_AX 0xFD
+#define INS_SBC_AY 0xF9
+#define INS_SBC_IX 0xE1
+#define INS_SBC_IY 0xF1
 
 // main loop
 void execute(p6502* proc, int cycles) {
@@ -237,6 +245,17 @@ void execute(p6502* proc, int cycles) {
             case INS_ADC_IY: traceInstructionStart("ADC - Indirect Y");
                 ADC(instruction, proc, &cycles);
                 traceInstructionEnd("ADC");
+                break;
+            case INS_SBC_IM: traceInstructionStart("SBC - Immediate");
+            case INS_SBC_ZP: traceInstructionStart("SBC - Zero Page");
+            case INS_SBC_ZX: traceInstructionStart("SBC - Zero Page X");
+            case INS_SBC_AB: traceInstructionStart("SBC - Absolute");
+            case INS_SBC_AX: traceInstructionStart("SBC - Absolute X");
+            case INS_SBC_AY: traceInstructionStart("SBC - Absolute Y");
+            case INS_SBC_IX: traceInstructionStart("SBC - Indirect X");
+            case INS_SBC_IY: traceInstructionStart("SBC - Indirect Y");
+                SBC(instruction, proc, &cycles);
+                traceInstructionEnd("SBC");
                 break;
             default:
                 printf("UNKNOWN OPCODE\n");

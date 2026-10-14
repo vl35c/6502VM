@@ -6,7 +6,7 @@ static void initCPU(p6502* proc) {
     CPU* cpu = (CPU*)malloc(sizeof(CPU));
     proc->cpu = cpu;
 
-    proc->cpu->PC = 0xFFFA;
+    proc->cpu->PC = 0xFFFC;
     proc->cpu->SP = 0xFF;
     proc->cpu->AC = 0x00;
     proc->cpu->IX = 0x00;

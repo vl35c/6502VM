@@ -25,6 +25,7 @@ Byte and(Byte byte1, Byte byte2);
 Byte eor(Byte byte1, Byte byte2);
 Byte ora(Byte byte1, Byte byte2);
 
-Byte add(Byte byte, CPU* cpu);
+Word add(Byte byte, p6502* proc);
+Word sub(Byte byte, p6502* proc);
 
 #endif
