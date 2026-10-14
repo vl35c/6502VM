@@ -7,7 +7,7 @@ void TXS(Byte instruction, p6502* proc, int* cycles) {
         case INS_TXS_IP: {
             Byte data = proc->cpu->IX;
             Byte addressLo = proc->cpu->SP;
-            uint16_t address = combineBytes(0x01, addressLo);
+            Word address = combineBytes(0x01, addressLo);
             write(proc->memory, address, data, cycles);
             break;
         }

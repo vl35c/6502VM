@@ -6,7 +6,7 @@ void TSX(Byte instruction, p6502* proc, int* cycles) {
     switch (instruction) {
         case INS_STX_IP: {
             Byte addressLo = proc->cpu->SP;
-            uint16_t address = combineBytes(0x01, addressLo);
+            Word address = combineBytes(0x01, addressLo);
             Byte data = read(proc->memory, address, cycles);
             proc->cpu->IX = data;
             proc->processor->ZF = (proc->cpu->IX == 0);

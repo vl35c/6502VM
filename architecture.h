@@ -18,7 +18,7 @@ typedef struct {
 } Processor;
 
 typedef struct {
-    uint16_t PC;      // program counter
+    Word PC;            // program counter
     Byte SP;            // stack pointer
     Byte AC;            // accumulator
     Byte IX;            // index register x

@@ -13,7 +13,7 @@ Byte fetch(Memory* memory, CPU* cpu, int* cycles) {
 }
 
 // read retrieves byte from memory without increasing program counter
-Byte read(Memory* memory, uint16_t address, int* cycles) {
+Byte read(Memory* memory, Word address, int* cycles) {
 #ifdef DEBUG_TRACE
     traceProcessor(TRACE_READ, address);
 #endif
@@ -28,13 +28,13 @@ Byte addToByte(Byte address, Byte indexRegister, int* cycles) {
 #ifdef DEBUG_TRACE
     traceProcessor(TRACE_ADD_BYTE, address, indexRegister);
 #endif
-    uint16_t bytes = address + indexRegister;
+    Word bytes = address + indexRegister;
     --*cycles;
     return (Byte)bytes;
 }
 
 // addToAddress take an address and a register and combines the two, constraining the result to a uint16
-uint16_t addToAddress(uint16_t address, Byte indexRegister) {
+Word addToAddress(Word address, Byte indexRegister) {
 #ifdef DEBUG_TRACE
     traceProcessor(TRACE_ADD_ADDRESS, address, indexRegister);
 #endif
@@ -42,21 +42,21 @@ uint16_t addToAddress(uint16_t address, Byte indexRegister) {
 }
 
 // crossedPage checks if an address and register when combined change the page, i.e. the first byte of an address [0x!!]
-void crossedPage(uint16_t address, Byte indexRegister, int* cycles) {
+void crossedPage(Word address, Byte indexRegister, int* cycles) {
     if ((Byte)(address + indexRegister) < (Byte)address) {
         --*cycles;
     }
 }
 
 // combine bytes takes two bytes and returns them as an address (uint16)
-uint16_t combineBytes(Byte hi, Byte lo) {
+Word combineBytes(Byte hi, Byte lo) {
 #ifdef DEBUG_TRACE
     traceProcessor(TRACE_COMBINE, hi, lo);
 #endif
-    return (uint16_t)((hi << 8) + lo);
+    return (Word)((hi << 8) + lo);
 }
 
-void write(Memory* memory, uint16_t address, Byte data, int* cycles) {
+void write(Memory* memory, Word address, Byte data, int* cycles) {
 #ifdef DEBUG_TRACE
     traceProcessor(TRACE_WRITE, address, data);
 #endif
@@ -76,7 +76,7 @@ void pushStack(Memory* memory, CPU* cpu, Byte data, int* cycles) {
     traceProcessor(TRACE_PUSH, cpu->SP, data);
 #endif
     Byte stack = 0x01;
-    uint16_t address = (stack << 8) + cpu->SP;
+    Word address = (stack << 8) + cpu->SP;
     memory->data[address] = data;
     *cycles -= 2;
     cpu->SP--;
@@ -87,7 +87,7 @@ Byte pullStack(Memory* memory, CPU* cpu, int* cycles) {
     traceProcessor(TRACE_PULL);
 #endif
     Byte addressLo = proc.cpu->SP;
-    uint16_t address = combineBytes(0x01, addressLo);
+    Word address = combineBytes(0x01, addressLo);
     Byte data = read(memory, address, cycles);
     write(memory, address, 0x00, cycles);
     return data;
