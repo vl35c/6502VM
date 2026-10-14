@@ -11,10 +11,10 @@ int main(void) {
     system("clear");
     init6502(&proc);
 
-    writeByte(proc.memory, 0xFFFC, 0xC5);
+    writeByte(proc.memory, 0xFFFC, 0xC4);
     writeByte(proc.memory, 0xFFFD, 0x00);
     writeByte(proc.memory, 0x0000, 0xFF);
-    proc.cpu->AC = 0xFF;
+    proc.cpu->IY = 0xFF;
 
     execute(&proc, 2);
 

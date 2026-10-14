@@ -169,6 +169,18 @@ void execute(p6502* proc, int cycles) {
                 CMP(instruction, proc, &cycles);
                 traceInstructionEnd("CMP");
                 break;
+            case INS_CPX_IM: traceInstructionStart("CPX - Immediate");
+            case INS_CPX_ZP: traceInstructionStart("CPX - Zero Page");
+            case INS_CPX_AB: traceInstructionStart("CPX - Absolute");
+                CPX(instruction, proc, &cycles);
+                traceInstructionEnd("CPX");
+                break;
+            case INS_CPY_IM: traceInstructionStart("CPY - Immediate");
+            case INS_CPY_ZP: traceInstructionStart("CPY - Zero Page");
+            case INS_CPY_AB: traceInstructionStart("CPY - Absolute");
+                CPY(instruction, proc, &cycles);
+                traceInstructionEnd("CPY");
+                break;
             default:
                 printf("UNKNOWN OPCODE\n");
         }
