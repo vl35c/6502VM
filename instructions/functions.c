@@ -136,3 +136,10 @@ Byte ora(Byte byte1, Byte byte2) {
 #endif
     return byte1 | byte2;
 }
+
+Byte add(Byte byte, CPU* cpu) {
+#ifdef DEBUG_TRACE
+    traceProcessor(TRACE_ADD, byte, cpu->AC);
+#endif
+    return cpu->AC + byte;
+}

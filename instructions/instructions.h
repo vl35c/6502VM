@@ -3,6 +3,7 @@
 
 #include "../common.h"
 #include "../architecture.h"
+#include "addressing.h"
 #include "functions.h"
 
 void LDA(Byte instruction, p6502* proc, int* cycles);
@@ -29,5 +30,7 @@ void AND(Byte instruction, p6502* proc, int* cycles);
 void EOR(Byte instruction, p6502* proc, int* cycles);
 void ORA(Byte instruction, p6502* proc, int* cycles);
 void BIT(Byte instruction, p6502* proc, int* cycles);
+
+void ADC(Byte instruction, p6502* proc, int* cycles);
 
 #endif

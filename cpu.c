@@ -82,6 +82,16 @@
 // BIT
 #define INS_BIT_ZP 0x24
 #define INS_BIT_AB 0x2C
+// ADC
+#define INS_ADC_IM 0x69
+#define INS_ADC_ZP 0x65
+#define INS_ADC_ZX 0x75
+#define INS_ADC_AB 0x6D
+#define INS_ADC_AX 0x7D
+#define INS_ADC_AY 0x79
+#define INS_ADC_IX 0x61
+#define INS_ADC_IY 0x71
+
 
 // main loop
 void execute(p6502* proc, int cycles) {
@@ -216,6 +226,17 @@ void execute(p6502* proc, int cycles) {
             case INS_BIT_AB: traceInstructionStart("BIT - Absolute");
                 BIT(instruction, proc, &cycles);
                 traceInstructionEnd("BIT");
+                break;
+            case INS_ADC_IM: traceInstructionStart("ADC - Immediate");
+            case INS_ADC_ZP: traceInstructionStart("ADC - Zero Page");
+            case INS_ADC_ZX: traceInstructionStart("ADC - Zero Page X");
+            case INS_ADC_AB: traceInstructionStart("ADC - Absolute");
+            case INS_ADC_AX: traceInstructionStart("ADC - Absolute X");
+            case INS_ADC_AY: traceInstructionStart("ADC - Absolute Y");
+            case INS_ADC_IX: traceInstructionStart("ADC - Indirect X");
+            case INS_ADC_IY: traceInstructionStart("ADC - Indirect Y");
+                ADC(instruction, proc, &cycles);
+                traceInstructionEnd("ADC");
                 break;
             default:
                 printf("UNKNOWN OPCODE\n");

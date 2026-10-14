@@ -6,53 +6,35 @@
 #define INS_LDX_AB 0xAE
 #define INS_LDX_AY 0xBE
 
+static void _ldx(Byte data, p6502* proc) {
+    proc->cpu->IX = data;
+    proc->processor->ZF = (proc->cpu->IX == 0);
+    proc->processor->NF = (proc->cpu->IX & 0b10000000) > 0;
+}
+
 void LDX(Byte instruction, p6502* proc, int* cycles) {
+    Byte data;
     switch (instruction) {
         case INS_LDX_IM: {
-            Byte data = fetch(proc->memory, proc->cpu, cycles);
-            proc->cpu->IX = data;
-            proc->processor->ZF = (proc->cpu->IX == 0);
-            proc->processor->NF = (proc->cpu->IX & 0b10000000) > 0;
+            data = fetch(proc->memory, proc->cpu, cycles);
             break;
         }
         case INS_LDX_ZP: {
-            Byte address = fetch(proc->memory, proc->cpu, cycles);
-            Byte data = read(proc->memory, (uint16_t)address, cycles);
-            proc->cpu->IX = data;
-            proc->processor->ZF = (proc->cpu->IX == 0);
-            proc->processor->NF = (proc->cpu->IX & 0b10000000) > 0;
+            data = addr_zero_page(proc->memory, proc->cpu, cycles);
             break;
         }
         case INS_LDX_ZY: {
-            Byte zpAddress = fetch(proc->memory, proc->cpu, cycles);
-            Byte address = addToByte(zpAddress, proc->cpu->IY, cycles);
-            Byte data = read(proc->memory, (uint16_t)address, cycles);
-            proc->cpu->IX = data;
-            proc->processor->ZF = (proc->cpu->IX == 0);
-            proc->processor->NF = (proc->cpu->IX & 0b10000000) > 0;
+            data = addr_zero_page_y(proc->memory, proc->cpu, cycles);
             break;
         }
         case INS_LDX_AB: {
-            Byte addressLo = fetch(proc->memory, proc->cpu, cycles);
-            Byte addressHi = fetch(proc->memory, proc->cpu, cycles);
-            uint16_t address = combineBytes(addressHi, addressLo);
-            Byte data = read(proc->memory, address, cycles);
-            proc->cpu->IX = data;
-            proc->processor->ZF = (proc->cpu->IX == 0);
-            proc->processor->NF = (proc->cpu->IX & 0b10000000) > 0;
+            data = addr_absolute(proc->memory, proc->cpu, cycles);
             break;
         }
         case INS_LDX_AY: {
-            Byte addressLo = fetch(proc->memory, proc->cpu, cycles);
-            Byte addressHi = fetch(proc->memory, proc->cpu, cycles);
-            uint16_t address = combineBytes(addressHi, addressLo);
-            address = addToAddress(address, proc->cpu->IY);
-            crossedPage(address, proc->cpu->IY, cycles);
-            Byte data = read(proc->memory, address, cycles);
-            proc->cpu->IX = data;
-            proc->processor->ZF = (proc->cpu->IX == 0);
-            proc->processor->NF = (proc->cpu->IX & 0b10000000) > 0;
+            data = addr_absolute_y(proc->memory, proc->cpu, cycles);
             break;
         }
     }
+    if (data) { _ldx(data, proc); }
 }

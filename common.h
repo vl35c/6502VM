@@ -7,5 +7,6 @@
 #define DEBUG_TRACE
 
 typedef uint8_t Byte;
+typedef uint16_t Word;
 
 #endif

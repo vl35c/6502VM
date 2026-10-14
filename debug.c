@@ -85,6 +85,10 @@ static void ora(const char* code, Byte byte2, Byte byte1) {
     printf("%-12s 0x%02x | 0x%02x = 0x%02x\n", code, byte1, byte2, byte1 | byte2);
 }
 
+static void add(const char* code, Byte byte, Byte ac) {
+    printf("%-12s 0x%02x + 0x%02x = %02x\n", code, byte, ac, (Byte)(byte + ac));
+}
+
 void traceInstructionStart(const char* name) {
     if (instructionInProgress) { return; }
     instructionInProgress = true;
@@ -176,6 +180,13 @@ void traceProcessor(TraceCode code, ...) {
             va_list args;
             va_start(args, code);
             ora("OR", va_arg(args, int), va_arg(args, int));
+            va_end(args);
+            break;
+        }
+        case TRACE_ADD: {
+            va_list args;
+            va_start(args, code);
+            add("ADD", va_arg(args, int), va_arg(args, int));
             va_end(args);
             break;
         }
