@@ -37,4 +37,6 @@ void CMP(Byte instruction, p6502* proc, int* cycles);
 void CPX(Byte instruction, p6502* proc, int* cycles);
 void CPY(Byte instruction, p6502* proc, int* cycles);
 
+void INC(Byte instruction, p6502* proc, int* cycles);
+
 #endif

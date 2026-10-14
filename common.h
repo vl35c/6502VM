@@ -125,5 +125,10 @@ typedef uint16_t Word;
 #define INS_CPY_IM 0xC0
 #define INS_CPY_ZP 0xC4
 #define INS_CPY_AB 0xCC
+// INC
+#define INS_INC_ZP 0xE6
+#define INS_INC_ZX 0xF6
+#define INS_INC_AB 0xEE
+#define INS_INC_AX 0xFE
 
 #endif

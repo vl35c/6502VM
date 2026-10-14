@@ -181,6 +181,13 @@ void execute(p6502* proc, int cycles) {
                 CPY(instruction, proc, &cycles);
                 traceInstructionEnd("CPY");
                 break;
+            case INS_INC_ZP: traceInstructionStart("INC - Zero Page");
+            case INS_INC_ZX: traceInstructionStart("INC - Zero Page X");
+            case INS_INC_AB: traceInstructionStart("INC - Absolute");
+            case INS_INC_AX: traceInstructionStart("INC - Absolute X");
+                INC(instruction, proc, &cycles);
+                traceInstructionEnd("INC");
+                break;
             default:
                 printf("UNKNOWN OPCODE\n");
         }
